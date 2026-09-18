@@ -27,7 +27,7 @@ def row_to_dict(row):
 @app.get("/")
 def read_root():
     return {
-        "message": "Welcome to the Task Management API"
+        "message": "Welcome to the Task Management API - CI/CD"
     }
 
 
