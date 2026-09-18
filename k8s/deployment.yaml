@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: task-api
-          image: sheharzad/task-api:1.0
+          image: sheharzad/task-api:latest
 
           ports:
             - containerPort: 8000
@@ -27,3 +27,26 @@ spec:
           env:
             - name: DATABASE_PATH
               value: /app/data/tasks.db
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
