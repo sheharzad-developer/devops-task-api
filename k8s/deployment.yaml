@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: task-api
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: task-api
+
+  template:
+    metadata:
+      labels:
+        app: task-api
+
+    spec:
+      containers:
+        - name: task-api
+          image: sheharzad/task-api:1.0
+
+          ports:
+            - containerPort: 8000
+
+          env:
+            - name: DATABASE_PATH
+              value: /app/data/tasks.db
